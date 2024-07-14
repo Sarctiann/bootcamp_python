@@ -72,4 +72,3 @@ Resumen
 - Clase 12. Autenticación, autorización y servicios en REST APIs
 
 > Sebastián Atlántico Rodríguez Capurro.
-# bootcamp_python
