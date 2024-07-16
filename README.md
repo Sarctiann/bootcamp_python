@@ -7,15 +7,23 @@ Este repositorio contiene los ejercicios del curso de Python.
 Para poder ejecutar este código primero vas a necesitar preparar el entorno de
 este repositorio, seguí los pasos a continuación:
 
-## Windows
+## Windows (cmd)
 
 ```bash
 python -m venv .ejercicios_venv
-.ejercicios_venv\Scripts\activate
+.ejercicios_venv\Scripts\activate.bat
 python -m pip install -r requirements.txt
 ```
 
-## Unix-like
+## Windows (PowerShell)
+
+```bash
+python -m venv .ejercicios_venv
+.ejercicios_venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+## Unix-like (Mac o Linux)
 
 ```bash
 python3 -m venv .ejercicios_venv
