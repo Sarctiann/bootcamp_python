@@ -1,7 +1,7 @@
-# from typing import Literal
+from typing import Any  # , Literal
 
 
-def ejercicios_de_la_clase_2():
+def ejercicios_de_la_clase_2() -> Any:
     """
     # Ejercicios de la clase 2
 
