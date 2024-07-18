@@ -1,6 +1,8 @@
 import inspect
 import re
 
+from typing import Any
+
 # For debugging purposes
 if __name__ == "__main__":
     from typing import Literal
@@ -8,10 +10,11 @@ if __name__ == "__main__":
 
 def get_annotations_and_rvalues(fn):
     source = inspect.getsource(fn)
-    var_tps = {
+    var_tps: dict[str, Any] = {
         k: [t, v]
         for k, t, v in re.findall(r"(\w+) ?: ?([\w\"\[\], ']+[^ ]) ?= ?(.+)\n", source)
     }
+    var_tps["_source"] = source
 
     return var_tps
 

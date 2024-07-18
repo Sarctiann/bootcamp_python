@@ -48,6 +48,9 @@ pytest ./modulosX/claseY/test_claseY.py -vv
 
 Donde por supuesto deberá reemplazar X e Y con el módulo y la clase correspondiente.
 
+> el argumento -vv es opcional, pero es útil para ver más detalles de los tests.
+> también se pueden correr los test con solo `-v` o sin estos argumentos.
+
 ---
 
 Resumen
@@ -56,7 +59,7 @@ Resumen
 
 - Clase 1. Introducción a Python3
 - Clase 2. Conceptos Generales
-- Clase 3. Control de flujo en Python3
+- Clase 3. Control de flujo y Operadores
 
 ### Modulo 2 ( empezando a programar )
 
