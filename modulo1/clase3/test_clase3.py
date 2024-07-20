@@ -105,8 +105,8 @@ source_ejercicio_5 = get_annotations_and_rvalues(function_ejercicio_5)
 
 def test_funcionanmiento_del_ejercicio_5():
     if function_ejercicio_5 is not None:
-        assert function_ejercicio_5(5, False) == 15, "La sumatoria de 5 es 15"
-        assert function_ejercicio_5(5, True) == 9, "La sumatoria de 5 es 9"
+        assert function_ejercicio_5(6, False) == 15, "La sumatoria de números menores a 6 es 15"
+        assert function_ejercicio_5(6, True) == 9, "La sumatoria de números menores a 6 es 9"
     else:
         assert False, "No se encuentra la función e (el quinto ejercicio)"
 
