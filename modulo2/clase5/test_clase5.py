@@ -1,23 +1,4 @@
-try:
-    from .clase5 import get_first_element  # type: ignore # noqa
-except ImportError:
-    assert False, "No se pudo importar la función `get_first_element`"
-
-try:
-    from .clase5 import make_dict  # type: ignore # noqa
-except ImportError:
-    assert False, "No se pudo importar la función `make_dict`"
-
-try:
-    from .clase5 import reset_price  # type: ignore # noqa
-except ImportError:
-    assert False, "No se pudo importar la función `modify_prices`"
-
-try:
-    from .clase5 import backup_prices  # type: ignore # noqa
-except ImportError:
-    assert False, "No se pudo importar la función `backup_prices`"
-
+from . import clase5 as mod
 
 # -----------------------------------------------------------------------------
 
@@ -40,6 +21,10 @@ def test_restrictive_map():
 
 
 def test_get_first_element():
+    try:
+        get_first_element = mod.get_first_element  # type: ignore # noqa
+    except ImportError as e:
+        assert False, "No se pudo importar la función `get_first_element`" + str(e)
     assert get_first_element([1, 2, 3]) == 1
     assert get_first_element([4, 5, 6]) == 4
     assert get_first_element([7, 8, 9]) == 7
@@ -48,6 +33,11 @@ def test_get_first_element():
 def test_make_dict():
     keys = ["key1", "key2", "key3"]
     values = ["value1", "value2", "value3"]
+
+    try:
+        make_dict = mod.make_dict  # type: ignore # noqa
+    except ImportError:
+        assert False, "No se pudo importar la función `make_dict`"
 
     result = make_dict(keys, values)
     assert result.get("key1") == "value1", "El valor de la clave 'key1' es incorrecto"
@@ -60,15 +50,27 @@ db = {"prices": prices}
 
 
 def test_modify_prices():
+
+    try:
+        reset_price = mod.reset_price  # type: ignore # noqa
+    except ImportError:
+        assert False, "No se pudo importar la función `modify_prices`"
+
     reset_price(db, 1)
     new_prices = db.get("prices", [])
     assert 100 in new_prices, "La función alteró un indice incorrecto"
     assert 200 not in new_prices, "La función no alteró el indice esperado"
-    assert 0 not in new_prices, "La función no alteró ningún índice"
+    assert 0 in new_prices, "La función no alteró ningún índice"
     assert 300 in new_prices, "La función alteró un indice incorrecto"
 
 
 def test_backup_prices():
+
+    try:
+        backup_prices = mod.backup_prices  # type: ignore # noqa
+    except ImportError:
+        assert False, "No se pudo importar la función `backup_prices`"
+
     bkp = backup_prices(db)
     ori_prices_origin = db.get("prices", [])
     bkp_prices_origin = bkp.get("prices_origin", [])
