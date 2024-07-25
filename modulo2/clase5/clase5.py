@@ -1,3 +1,10 @@
+"""
+Este archivo contiene el código de ejemplo de la clase5.
+
+Al final del mismo contiene unas consignas para resolver,
+luego ejecute los test, para verificar las soluciones.
+"""
+
 # By convention, import statements should be at the top of the file
 # We will use this later
 from copy import deepcopy
@@ -31,8 +38,8 @@ tu = (10, 2, 3)  # tuple
 # Tryin to change the first element unsuccessfully
 
 try:
-    # You will get a TypeError here.. don't worry we are handling it
-    tu[0] = 1
+    # You will get a TypeError here... don't worry we are handling it
+    tu[0] = 1  # type: ignore # noqa
 except TypeError:
     tu = (1, *tu[1:])
 finally:
@@ -150,3 +157,23 @@ print(restrictive_map("key1"))
 # print(restrictive_map("key4"))
 
 # -----------------------------------------------------------------------------
+
+"""
+Consignas:
+
+1. Crear una función llamada `get_first_element` que reciba una lista y retorne
+    el primer elemento de la lista.
+
+2. Crear una función llamada `make_dict` que reciba dos listas, una de claves y 
+    otra de valores, y retorne un diccionario con las claves y valores correspondientes.
+
+3. Dado un diccionario con la estructura {"precios": [100, 200, 300]}.
+
+    A. Crear una función llamada `reset_price` que reciba el diccionario y un índice,
+        modifique el precio en la posición indicada por el índice a 0.
+    
+    B. Crear una función llamada `backup_prices` que reciba el diccionario
+        y retorne una copia profunda del mismo, en donde debe incluir la clave 
+        "prices_origin" con la lista de precios original.
+
+"""
