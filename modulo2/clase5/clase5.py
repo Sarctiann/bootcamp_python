@@ -117,10 +117,10 @@ prices = [100, 200, 300]
 db1 = {"prices": prices}
 print("Precios inicializados:", db1["prices"])
 
-shallow_copy = deepcopy(db1)
+deep_copy = deepcopy(db1)
 
-shallow_copy["prices"][0] = 150
-print("Precios modificados:", shallow_copy["prices"])
+deep_copy["prices"][0] = 150
+print("Precios modificados:", deep_copy["prices"])
 
 # Trying to acces the original prices
 print("Precios originales ?:", db1["prices"], "OK!")
