@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 
+from .routes import roles_router
 
 app = FastAPI()
 
 
 @app.get("/")
 def home():
-    return {"Hello": "World"}
+    return {"message": "Hello, World!"}
+
+
+app.include_router(roles_router, prefix="/roles", tags=["Roles"])
