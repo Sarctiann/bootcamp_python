@@ -1,5 +1,5 @@
 """
-Este archivo contiene el código de ejemplo de la clase5.
+Este archivo contiene el código de ejemplo de la clase6.
 
 Al final del mismo contiene unas consignas para resolver,
 luego ejecute los test, para verificar las soluciones.
