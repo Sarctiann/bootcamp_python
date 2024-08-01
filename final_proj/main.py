@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from .routes import roles_router
 
 app = FastAPI()
+app.title = "Final Project API"
 
 
 @app.get("/")
