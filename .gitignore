@@ -1,5 +1,7 @@
 **/*resolved.py
 *resolved.py
+.env
+.secret
 
 .ejercicios_venv
 .pytest_cache
