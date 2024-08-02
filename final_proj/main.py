@@ -2,7 +2,8 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from .api.routes import roles_router
+from . import api
+
 
 app = FastAPI(title="Final Project API")
 
@@ -10,8 +11,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
-@app.get("/")
-def get_template(request: Request):
+@app.get("/", include_in_schema=False)
+def home(request: Request):
     return templates.TemplateResponse(
         name="index.html",
         request=request,
@@ -22,4 +23,4 @@ def get_template(request: Request):
     )
 
 
-app.include_router(roles_router, prefix="/roles", tags=["Roles"])
+app.include_router(api.api)
