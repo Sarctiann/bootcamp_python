@@ -141,7 +141,7 @@ Para trabajar con entornos virtuales necesitamos conocer algunos comandos:
 Para instalar FastAPI, primero necesitamos crear y activar nuestro entorno virtual,
 y luego instalar este paquete:
 
-- `python -m pip install fastapi`
+- `python -m pip install fastapi[standard]`
 
 como hemos agregado una dependencia a nuestro proyecto debemos recordar correr
 el comando `pip freeze > requirements.txt`
