@@ -1,5 +1,7 @@
 # Proyecto Final - API
 
+![banner](README/bootcamp3.png)
+
 ## Modulo 4 - clase 8
 
 - [Librerías externas y el uso de pip](#librerías-externas-y-el-uso-de-pip)
@@ -9,6 +11,9 @@
 - [Comandos pip para el manejo de entornos virtuales](#manejo-de-entornos-virtuales):
 - [Instalación de FastAPI](#instalación-de-fastapi)
 - [Creación de una app básica](#creación-de-una-app-básica)
+- [Creamos algunas rutas (endpoints) GET](#creamos-algunas-rutas)
+- [aclaraciones sobre JSON (de ser necesario)](#aclaraciones-sobre-json)
+- [FastApi "/docs" and "/redoc"](#fastapi-docs-and-redoc)
 
 ---
 
@@ -138,7 +143,7 @@ Para trabajar con entornos virtuales necesitamos conocer algunos comandos:
 Para instalar FastAPI, primero necesitamos crear y activar nuestro entorno virtual,
 y luego instalar este paquete:
 
-- `python -m pip install fastapi`
+- `python -m pip install fastapi[standard]`
 
 como hemos agregado una dependencia a nuestro proyecto debemos recordar correr
 el comando `pip freeze > requirements.txt`
@@ -170,5 +175,34 @@ atento a los cambios que realizamos en el código y se van a sincronizar sin nec
 de reiniciar nuestro servidor.
 
 Ahora podemos ir a la url `localhost:8000` y ver que nuestra app funciona.
+
+---
+
+### [Creamos algunas rutas](.)
+
+- En algunas ocaciones necesitamos retornar una vista (HTML), modifiquemos la funcion
+  `home` para que retorne una pagina HTML.
+  [fuente](https://fastapi.tiangolo.com/advanced/templates/)
+- Por otra parte nuestra API tiene que ser capas de enviar información al cliente
+  para esto útilizamos el formato JSON. Creemos 2 endpoints que retornen las dos
+  colecciones de Python que se pueden "serializar" en JSON válido.
+
+---
+
+### [aclaraciones sobre JSON)](.)
+
+- El formato JSON (JavaScript Object Notation) es un formato de datos que nos permite
+  enviar y recibir datos de forma eficiente entre sistemas. En si es un string de
+  bytes. Y su estructura es analogica con la de las listas y diccionarios de Python.
+  con la excepción de que las claves deben ser siempre strings.
+
+- Con JSON nos sirve de lenguaje intermedio entre el cliente y el servidor.
+
+---
+
+### [FastApi docs and redoc](.)
+
+- Pro último, observemos que fastapi nos provee la documentación de la API.
+  Sin necesidad de agregar ninguna configuración o dependencia.
 
 ---
