@@ -134,7 +134,7 @@ Para trabajar con entornos virtuales necesitamos conocer algunos comandos:
 - Si necesitamos crear o actualizar el archivo **requirements.txt**, podemos
   usar el siguiente comando:
 
-  - `pip freeze > requirements.txt`
+  - `python -m pip freeze > requirements.txt`
 
 ---
 
@@ -146,7 +146,7 @@ y luego instalar este paquete:
 - `python -m pip install fastapi[standard]`
 
 como hemos agregado una dependencia a nuestro proyecto debemos recordar correr
-el comando `pip freeze > requirements.txt`
+el comando `python -m pip freeze > requirements.txt`
 
 ---
 
