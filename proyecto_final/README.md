@@ -7,8 +7,8 @@
 - [Librerías externas y el uso de pip](#librerías-externas-y-el-uso-de-pip)
 - [Global vs Local (packages)](#global-vs-local-packages)
 - [¿Que son los entornos virtuales?](#entornos-virtuales)
-- [Algunas nociones sobre sistemas](#algunas-nociones-sobre-sistemas):
-- [Comandos pip para el manejo de entornos virtuales](#manejo-de-entornos-virtuales):
+- [Algunas nociones sobre sistemas](#algunas-nociones-sobre-sistemas)
+- [Comandos pip para el manejo de entornos virtuales](#manejo-de-entornos-virtuales)
 - [Instalación de FastAPI](#instalación-de-fastapi)
 - [Creación de una app básica](#creación-de-una-app-básica)
 - [Creamos algunas rutas (endpoints) GET](#creamos-algunas-rutas)
@@ -74,7 +74,7 @@ el punto final (directorio o archivo).
 
 En cambio, si la ruta empieza con un punto o directamente el nombre de un archivo
 o directorio, se trata de una ruta relativa (es decir, una ruta desde nuestro
-directorio actual). Para movernos un directorio padre usamos ".." y para mayor
+directorio actual). Para movernos un directorio padre usamos "\.\." y para mayor
 consistencia, nos referimos al directorio actual con "."
 
 - cwd
@@ -134,7 +134,7 @@ Para trabajar con entornos virtuales necesitamos conocer algunos comandos:
 - Si necesitamos crear o actualizar el archivo **requirements.txt**, podemos
   usar el siguiente comando:
 
-  - `freeze > requirements.txt`
+  - `python -m pip freeze > requirements.txt`
 
 ---
 
@@ -146,7 +146,7 @@ y luego instalar este paquete:
 - `python -m pip install fastapi[standard]`
 
 como hemos agregado una dependencia a nuestro proyecto debemos recordar correr
-el comando `pip freeze > requirements.txt`
+el comando `python -m pip freeze > requirements.txt`
 
 ---
 
@@ -161,7 +161,7 @@ from fastapi import FastAPI
 app = FastAPI()
 
 @app.get("/")
-def home():
+async def home():
     return {"message": "Hello World"}
 ```
 
