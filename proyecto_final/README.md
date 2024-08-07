@@ -2,7 +2,7 @@
 
 ![banner](README/bootcamp3.png)
 
-## Modulo 4 - clase 8
+## Modulo 4 - Clase 8
 
 - [Librerías externas y el uso de pip](#librerías-externas-y-el-uso-de-pip)
 - [Global vs Local (packages)](#global-vs-local-packages)
@@ -126,13 +126,13 @@ Para trabajar con entornos virtuales necesitamos conocer algunos comandos:
 
   - `python -m pip install nombre_de_la_libreria` (para ambos sistemas)
 
-- Si nuestro proyecto contiene un archivo **requirements.txt**, podemos usar el
+- Si nuestro proyecto contiene un archivo [**"requirements.txt"**](requirements.txt), podemos usar el
   siguiente comando para instalar todas las dependencias del proyecto:
 
   - `python -m pip install -r requirements.txt`
 
-- Si necesitamos crear o actualizar el archivo **requirements.txt**, podemos
-  usar el siguiente comando:
+- Si necesitamos crear o actualizar el archivo "requirements.txt",
+  podemos usar el siguiente comando:
 
   - `python -m pip freeze > requirements.txt`
 
@@ -143,7 +143,7 @@ Para trabajar con entornos virtuales necesitamos conocer algunos comandos:
 Para instalar FastAPI, primero necesitamos crear y activar nuestro entorno virtual,
 y luego instalar este paquete:
 
-- `python -m pip install fastapi[standard]`
+- `python -m pip install "fastapi[standard]"`
 
 como hemos agregado una dependencia a nuestro proyecto debemos recordar correr
 el comando `python -m pip freeze > requirements.txt`
@@ -153,7 +153,7 @@ el comando `python -m pip freeze > requirements.txt`
 ### [Creación de una app básica](.)
 
 Ahora solo nos queda crear nuestra primer app en FastAPI. Creemos un archivo
-main.py y agreguemos el siguiente código:
+["main.py"](./main.py) y agreguemos el siguiente código:
 
 ```python
 from fastapi import FastAPI
@@ -180,7 +180,7 @@ Ahora podemos ir a la url `localhost:8000` y ver que nuestra app funciona.
 
 ### [Creamos algunas rutas](.)
 
-- En algunas ocaciones necesitamos retornar una vista (HTML), modifiquemos la funcion
+- En algunas ocaciones necesitam∫os retornar una vista (HTML), modifiquemos la funcion
   `home` para que retorne una pagina HTML.
   [fuente](https://fastapi.tiangolo.com/advanced/templates/)
 - Por otra parte nuestra API tiene que ser capas de enviar información al cliente
@@ -200,9 +200,11 @@ Ahora podemos ir a la url `localhost:8000` y ver que nuestra app funciona.
 
 ---
 
-### [FastApi docs and redoc](.)
+### [FastApi docs and Redoc](.)
 
 - Pro último, observemos que fastapi nos provee la documentación de la API.
   Sin necesidad de agregar ninguna configuración o dependencia.
+  - [/DOCS (swagger)](http://localhost:8000/docs)
+  - [/Redoc (ReDoc)](http://localhost:8000/redoc)
 
 ---
