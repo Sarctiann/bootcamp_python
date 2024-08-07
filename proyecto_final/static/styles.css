@@ -1,8 +1,10 @@
 body {
-  display: flex;
-  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
-
 h1 {
-  color: aqua;
+  color: #333;
+}
+p {
+  color: #37a;
 }
