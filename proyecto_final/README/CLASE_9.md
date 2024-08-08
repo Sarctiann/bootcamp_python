@@ -201,14 +201,14 @@ funciona.
 
 ### [Verificación en Postman](.)
 
-Probemoslo con un cliente diferente. En vez de postman vamos a útilizar ThunderClient
+Probemoslo con un cliente diferente. En vez de postman vamos a utilizar ThunderClient
 el cual vamos a tener integrado en vscode.
 
 ---
 
 ### [Notas sobre otros clientes](.)
 
-Es importante tener en cuenta que la comunicacon entre el cliente y el servidor
+Es importante tener en cuenta que la comunicación entre el cliente y el servidor
 tiene algunos mecanismos para el intercambio de recursos, uno de ellos es
 [CORS](https://developer.mozilla.org/es/docs/Web/HTTP/CORS), los navegadores tienen
 un mecanismo de seguridad que restringe el cruce de recursos. Por lo que probablemente
