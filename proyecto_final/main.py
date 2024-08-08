@@ -44,8 +44,16 @@ def get_peli(id: int):
     Args:
         id (int): el id de la peli
     """
-    for peli in pelis:
-        if peli["id"] == id:
-            return peli
+    # for peli in pelis:
+    #     if peli["id"] == id:
+    #         return peli
 
-    return {"Error": "Peli no encontrada"}
+    # return {"Error": "Peli no encontrada"}
+    return search_pelis(id)
+
+def search_pelis(id: int):
+    ans = filter(lambda peli: peli["id"] == id, pelis)
+    try:
+        return list(ans)[0]
+    except:
+        return {"Error": "Peli no encontrada"}
