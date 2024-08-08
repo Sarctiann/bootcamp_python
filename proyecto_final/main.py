@@ -26,15 +26,9 @@ def home(request: Request):
 # FAKE DATABASE ----------------------------------------------------------------
 
 products = [
-    Product(
-        id=1, name="Product 1", description="Description 1", price=13.0, quantity=50
-    ),
-    Product(
-        id=2, name="Product 2", description="Description 2", price=22.0, quantity=20
-    ),
-    Product(
-        id=3, name="Product 3", description="Description 3", price=42.0, quantity=15
-    ),
+    dict(id=1, name="Product 1", description="Description 1", price=13.0, quantity=50),
+    dict(id=2, name="Product 2", description="Description 2", price=22.0, quantity=20),
+    dict(id=3, name="Product 3", description="Description 3", price=42.0, quantity=15),
 ]
 
 iid = len(products)
@@ -50,7 +44,7 @@ def list_products():
 @app.get("/products/{id}")
 def get_product(id: int):
     for product in products:
-        if product.id == id:
+        if product.get("id") == id:
             return product
     return {"Error": "Product not found"}
 
@@ -64,13 +58,17 @@ def create_product(product: Product):
     Además también vamos a obtener la documentación necesaria en Swagger.
 
     """
-    global iid
-    # De esta manera le decimos a python que estamos usando una variable
-    # global iid
-
     try:
+        global iid
         iid += 1
-        products.append(Product(id=iid, **product.model_dump()))
+        # De esta manera le decimos a python que estamos usando una variable
+        # global iid
+
+        product_dict = product.model_dump()  # en la docu: .dict()
+        product_dict.update({"id": iid})
+        products.append(product_dict)
+
     except Exception as e:
         return {"Error": str(e)}
-    return {"Success": f"Product created with id {product.id}"}
+
+    return {"Success": f"Product created with id {product_dict.get('id')}"}

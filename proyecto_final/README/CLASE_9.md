@@ -8,9 +8,9 @@
 
 ### Módelo Cliente/Servidor
 
-- [¿Que es un servidor?](#servidor) (contexto aplicación web)
+- [¿Que es un servidor?](#server) (contexto aplicación web)
   `[protocol, host, port, handler, uri, response]`
-- [¿Que es un cliente?](#cliente) (mismo contexto)
+- [¿Que es un cliente?](#client) (mismo contexto)
   `[resource, request]`
 - [Verbos HTTP](#verbos-http)
   [fuente](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
@@ -32,14 +32,14 @@
 
 ---
 
-### [Servidor](.)
+### [Server](.)
 
 "Un "servidor" es un programa que se encarga de procesar las peticiones de un
 cliente" En nuestro caso vamos a trabajar con un servidor web, esto significa que
 nuestro servidor es un programa que recibe peticiones de clientes a través de una
 red. Hay 3 cosas que tenemos que tener en cuenta ANTES del servidor:
 
-- #### Protocolo:
+- #### Protocol:
 
   El protocolo es el tipo de red que utilizamos. Por ejemplo: `http`, `https`,
   `ftp`. Para nuestra aplicación web, vamos a útilizar dos protocolos: `http` y
@@ -104,7 +104,7 @@ Y acá podemos destacar otras 3 responsabilidades:
 
 ---
 
-### [Cliente](.)
+### [Client](.)
 
 El cliente es el programa que va a hacer las peticiones a los servidores.
 En nuestro caso el cliente va a ser una app front-end que va a hacer peticiones
@@ -181,23 +181,38 @@ vamos a crear un archivo [`products.py`](../models/products.py) que contenga nue
 clase `Product`.
 
 También vamos a exponerlo en nuestro archivo [`__init__.py`](../models/__init__.py)
-para poder importarlo directamente en [`app.py`](../app.py).
+para poder importarlo directamente en [`main.py`](../main.py#L5).
 
 ---
 
 ### [Validación del modelo](.)
 
+Como podemos ver en el endpoint [`POST /products`](../main.py#L52), la validación
+de los datos se hace de manera automatica gracias a fastapi y pydantic.
+
 ---
 
 ### [Verificación en swagger](.)
+
+Levantemos nuestra app y vayamos a [DOCS](http://localhost:8000/docs) para ver como
+funciona.
 
 ---
 
 ### [Verificación en Postman](.)
 
+Probemoslo con un cliente diferente. En vez de postman vamos a útilizar ThunderClient
+el cual vamos a tener integrado en vscode.
+
 ---
 
 ### [Notas sobre otros clientes](.)
+
+Es importante tener en cuenta que la comunicacon entre el cliente y el servidor
+tiene algunos mecanismos para el intercambio de recursos, uno de ellos es
+[CORS](https://developer.mozilla.org/es/docs/Web/HTTP/CORS), los navegadores tienen
+un mecanismo de seguridad que restringe el cruce de recursos. Por lo que probablemente
+tendremos que configurar CORS en nuestra app.
 
 ---
 
