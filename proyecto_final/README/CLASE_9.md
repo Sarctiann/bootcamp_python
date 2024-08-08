@@ -175,9 +175,9 @@ Los módelos no son mas que clases que nos permiten representar esquemas de dato
 estos esquemas van a ser consistentes entre nuestro front-end, back-end y base
 de datos.
 Para esto, vamos a empezar a estructurar nuestra app como se debe, por lo que
-primero
-vamos a crear un **paquete** `models` que contenga nuestros módelos. Dentro vamos
-a crear un archivo [`products.py`](../models/products.py) que contenga nuestra
+primero vamos a eliminar el código de la clase anterior (lo de pelis).
+Luego vamos a crear un **paquete** `models` que contenga nuestros módelos. Dentro
+vamos a crear un archivo [`products.py`](../models/products.py) que contenga nuestra
 clase `Product`.
 
 También vamos a exponerlo en nuestro archivo [`__init__.py`](../models/__init__.py)

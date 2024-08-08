@@ -23,35 +23,7 @@ def home(request: Request):
     )
 
 
-# esta lista emula nuestra base de datos, por el momento
-pelis = [
-    {"id": 1, "title": "The Lord of the Rings", "author": "J.R.R. Tolkien"},
-    {"id": 2, "title": "Harry Potter", "author": "J.K. Rowling"},
-    {"id": 3, "title": "The Hobbit", "author": "J.R.R. Tolkien"},
-]
-
-
-@app.get("/pelis")
-def list_pelis():
-    return pelis
-
-
-@app.get("/pelis/{id}")
-def get_peli(id: int):
-    """
-    Esta función retorna la peli que coincida con el id
-    comopodemos ver, le estamos pasando el id tanto por parámetro como en la url
-    como a la función.
-
-    Args:
-        id (int): el id de la peli
-    """
-    for peli in pelis:
-        if peli["id"] == id:
-            return peli
-
-    return {"Error": "Peli no encontrada"}
-
+# FAKE DATABASE ----------------------------------------------------------------
 
 products = [
     Product(
@@ -64,6 +36,10 @@ products = [
         id=3, name="Product 3", description="Description 3", price=42.0, quantity=15
     ),
 ]
+
+iid = len(products)
+
+# ------------------------------------------------------------------------------
 
 
 @app.get("/products")
@@ -85,5 +61,16 @@ def create_product(product: Product):
     Con simplemente declarar el tipo de nuestro parametro (`product: Product`)
     fastapi se va aencargar de validar nuestra data!
 
+    Además también vamos a obtener la documentación necesaria en Swagger.
+
     """
-    products.append(product)
+    global iid
+    # De esta manera le decimos a python que estamos usando una variable
+    # global iid
+
+    try:
+        iid += 1
+        products.append(Product(id=iid, **product.model_dump()))
+    except Exception as e:
+        return {"Error": str(e)}
+    return {"Success": f"Product created with id {product.id}"}

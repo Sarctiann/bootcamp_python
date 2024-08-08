@@ -4,7 +4,7 @@ __all__ = ["Product"]
 
 
 class Product(BaseModel):
-    id: int
+    id: int | None
     name: str
     description: str
     price: float
