@@ -42,7 +42,7 @@ red. Hay 3 cosas que tenemos que tener en cuenta ANTES del servidor:
 - #### Protocol:
 
   El protocolo es el tipo de red que utilizamos. Por ejemplo: `http`, `https`,
-  `ftp`. Para nuestra aplicación web, vamos a útilizar dos protocolos: `http` y
+  `ftp`. Para nuestra aplicación web, vamos a utilizar dos protocolos: `http` y
   `https` (http secure).
   En realidad el protocolo es prácticamente el mismo pero en `https` las peticiones
   se cifran.
@@ -137,7 +137,7 @@ Los verbos http (HTTP verbs) son las acciones que podemos realizar con las
 peticiones. Nosotros vamos a utilizar los verbos GET, POST, PUT, DELETE. Pero
 hay varios más que pueden investigar en el enlace adjunto en el índice.
 Notros podríamos solicitar cualquier tipo de recurso con cualquiera de estos
-métodos en realidad. Pero por convención vamos a útilizar estos 4 asociados a las
+métodos en realidad. Pero por convención vamos a utilizar estos 4 asociados a las
 diferentes operaciones CRUD (Create, Read, Update, Delete):
 
 | Verbos | Acciones |
