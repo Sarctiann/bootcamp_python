@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from .models import Product
+from .utils import find_first
 
 
 app = FastAPI(title="Final Project API")
@@ -43,10 +44,14 @@ def list_products():
 
 @app.get("/products/{id}")
 def get_product(id: int):
-    for product in products:
-        if product.get("id") == id:
-            return product
-    return {"Error": "Product not found"}
+    # for product in products:
+    #     if product.get("id") == id:
+    #         return product
+    # return {"Error": "Product not found"}
+    ans = find_first(products, id = id)
+    if not ans:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return ans
 
 
 @app.post("/products")
@@ -58,17 +63,31 @@ def create_product(product: Product):
     Además también vamos a obtener la documentación necesaria en Swagger.
 
     """
-    try:
-        global iid
-        iid += 1
-        # De esta manera le decimos a python que estamos usando una variable
-        # global iid
+    # try:
+    #     global iid
+    #     iid += 1
+    #     # De esta manera le decimos a python que estamos usando una variable
+    #     # global iid
 
-        product_dict = product.model_dump()  # en la docu: .dict()
-        product_dict.update({"id": iid})
-        products.append(product_dict)
+    #     product_dict = product.model_dump()  # en la docu: .dict()
+    #     product_dict.update({"id": iid})
+    #     products.append(product_dict)
 
-    except Exception as e:
-        return {"Error": str(e)}
+    # except Exception as e:
+    #     return {"Error": str(e)}
+    global iid
+    # De esta manera le decimos a python que estamos usando una variable
+    # global iid
+
+    product_dict = product.model_dump()  # en la docu: .dict()
+    existing_product = find_first(
+        products, name = product_dict.get("name")
+    )
+    if existing_product:
+        # El producto ya existe
+        raise HTTPException(status_code=409, detail="Product already exists")
+    iid += 1
+    product_dict.update({"id": iid})
+    products.append(product_dict)
 
     return {"Success": f"Product created with id {product_dict.get('id')}"}

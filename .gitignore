@@ -3,6 +3,7 @@
 .env
 .secret
 
+*_venv
 .venv
 .ejercicios_venv
 .pytest_cache
