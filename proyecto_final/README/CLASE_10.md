@@ -153,7 +153,7 @@ endpoints (obviamente, los referidos a los productos).
 ### [Creamos el paquete database](.)
 
 Por último, crearemos un paquete `database` en el que vamos a crear nuestra conexión
-a la base de datos. Lo vamos a hacer en [`__base.py`](../api/database/__init__.py)
+a la base de datos. Lo vamos a hacer en [`__base.py`](../api/database/__base.py)
 luego vamos a crear los "servicios" para cada modelo
 ([`products`](../api/database/products.py)). Luego seguramente reubiquemos este
 paquete de una forma mas conveniente.

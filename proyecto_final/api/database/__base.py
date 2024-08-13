@@ -3,12 +3,10 @@ from pymongo.server_api import ServerApi
 
 from ..config import COLLECTIONS, MONGODB_URI, logger
 
-uri = MONGODB_URI
-
 __all__ = ["db"]
 
 # Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi("1"))
+client = MongoClient(MONGODB_URI, server_api=ServerApi("1"))
 
 
 # Send a ping to confirm a successful connection
