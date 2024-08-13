@@ -31,5 +31,5 @@ async def get_product(id: PydanticObjectId, products: product_collection):
 
 @products_router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_product(product: Product, products: product_collection):
-    result = products.insert_one(product.model_dump())
+    result = products.insert_one(product.model_dump(exclude={"id"}))
     return {"result message": f"Product created with id: {result.inserted_id}"}
