@@ -506,6 +506,21 @@ files = [
 typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
+name = "pydantic-mongo"
+version = "2.3.0"
+description = "Document object mapper for pydantic and pymongo"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pydantic_mongo-2.3.0-py2.py3-none-any.whl", hash = "sha256:2974740e7c922db34c39bc9235b13aa13f12526c7b2dc24bd9ca69eebb7c9a20"},
+    {file = "pydantic_mongo-2.3.0.tar.gz", hash = "sha256:d1b05d6bf28e0eeca66809a99c362b958bf6fc6af59350d44d9a948e5fc30e3b"},
+]
+
+[package.dependencies]
+pydantic = ">=2.0.2,<3.0.0"
+pymongo = ">=4.3,<5.0"
+
+[[package]]
 name = "pygments"
 version = "2.18.0"
 description = "Pygments is a syntax highlighting package written in Python."
@@ -1018,4 +1033,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "5b5075dde9f3dd35bfab612ac15fe9671ed6d5ec70d0223c5423e821caca30a0"
+content-hash = "ff9189cf8bd67a4e58317e1626dd9c18d3dd279abce105db9cd8cbfe951655cf"

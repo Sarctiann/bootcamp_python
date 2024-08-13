@@ -22,6 +22,8 @@
 - [Creamos el paquete api](#creamos-el-paquete-api)
 - [Creamos el paquete config](#creamos-el-paquete-config)
 - [Creamos el paquete routes](#creamos-el-paquete-routes)
+- [Creamos el paquete database](#creamos-el-paquete-database)
+- [BSON y los ObjectIds](#bson-y-los-objectids)
 
 ---
 
@@ -119,3 +121,65 @@ tenemos configurado en MongoDB Atlas.
 A medida que nuestro proyecto va creciendo nuestros paquetes y módulos comienzan
 a mezclarse, por lo que finalmente vamos a reestructurar nuestro proyecto. Lo que
 también implica que tengamos que modificar nuestras rutas de importación.
+
+En el "root" de nuestro projecto vamos a dejar todos los archivos relacionados a
+la gestión del mismo (por ejemplo el README.md, los archivos de poetry y los de git).
+
+También vamos a dejar los directorios que no son "paquetes de python" (en este
+caso `templates` y `static`).
+
+Pero todos los paquetes y módulos de nuestra API los vamos a llevar a la carpeta
+[`api/`](../api/). (por ahora solo tenemos `models/`).
+
+### [Creamos el paquete config](.)
+
+Es una buena práctica centralizar todos los archivos de configuración de nuestro
+proyecto para simplificar su mantenimiento. En este caso vamos a crear un
+paquete `config` para configurar el proyecto.
+
+> (como en nuestro caso nuestra configuración es muy pequeña la podemos declarar
+> directamente en nuestro [`__init__.py`](../api/config/__init__.py))
+
+### [Creamos el paquete routes](.)
+
+Ahora vamos a crear el paquete `routes` y un módulo
+[`products`](../api/routes/products.py) al que finalmente vamos a mover nuestros
+endpoints (obviamente, los referidos a los productos).
+
+### [Creamos el paquete database](.)
+
+Por último, crearemos un paquete `database` en el que vamos a crear nuestra conexión
+a la base de datos. Lo vamos a hacer en [`__base.py`](../api/database/__init__.py)
+luego vamos a crear los "servicios" para cada modelo
+([`products`](../api/database/products.py)). Luego seguramente reubiquemos este
+paquete de una forma mas conveniente.
+
+### [BSON y los ObjectIds](.)
+
+Como ya vimos, JSON es el formato de datos que usamos para transferir datos entre
+el servidor y el cliente.
+
+Para comunicar nuestra app con la base de datos mongodb, vamos a usar BSON (Binary
+JSON, el cual es muy similar).
+
+La principal diferencia es que que el formato `bson` puede contener representaciones
+de objetos, mientras que el JSON solo puede tener una representación de: `str`,
+`int`, `float`, `bool`, `null`, `list`s por extensión, y `dict`s por extensión.
+
+Puntualmente vamos a notar que los ids, no van a ser de tipo `int` sino `ObjectId`,
+y esta representación no puede ser directamente serializada por JSON. Por lo que
+vamos a tener que manejarlo de alguna manera. Una opción sería escribir nuestros
+serializadores y parseadores personalizados, para convertir manualmente estos
+`ObjectId`s en `str`s. Sin embargo esto nos obligaría a serializar y deserializar
+manualmente todos nuestros recursos.
+
+Por lo cual mejor vamos a agregar un paquete que va a extender la funcionalidad de
+pydantic para tratar estos objetos:
+
+- `poetry add pydantic-mongo`
+
+y vamos a modificar nuestros modelos como en el módulo
+[`models/products.py`](../api/models/products.py).
+
+Finalmente, vamos a conectar nuestros endpoints de
+[`routes/products.py`](../api/routes/products.py) con la base de datos.

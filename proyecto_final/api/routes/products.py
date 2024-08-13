@@ -1,26 +1,20 @@
 from fastapi.routing import APIRouter
+
+from ..database.products import product_collection
 from ..models import Product
+
+products = []
+iid = 0
 
 __all__ = ["product_router"]
 
-# FAKE DATABASE ----------------------------------------------------------------
-
-products = [
-    dict(id=1, name="Product 1", description="Description 1", price=13.0, quantity=50),
-    dict(id=2, name="Product 2", description="Description 2", price=22.0, quantity=20),
-    dict(id=3, name="Product 3", description="Description 3", price=42.0, quantity=15),
-]
-
-iid = len(products)
-
-# ------------------------------------------------------------------------------
 
 product_router = APIRouter(prefix="/products", tags=["Products"])
 
 
 @product_router.get("/products")
-def list_products():
-    return products
+def list_products(products: product_collection):
+    return products.find()
 
 
 @product_router.get("/products/{id}")
