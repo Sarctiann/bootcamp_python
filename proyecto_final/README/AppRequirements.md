@@ -10,8 +10,14 @@
 
 ### Requerimientos Base:
 
-1. Creación de modelos o entidades a utilizar
-1. Armado de arquitectura básica
+1. Creación de modelos o entidades a utilizar:
+   - Producto
+   - Usuario
+1. Armado de arquitectura básica:
+   - config
+   - routes
+   - models
+   - database
 1. Autenticación:
    - Añadir Login - Objetivo: Autenticación de usuario
    - Añadir Registro de Usuario - Objetivo: Crear una cuenta de usuario
