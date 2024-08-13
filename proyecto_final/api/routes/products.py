@@ -1,68 +1,35 @@
+from fastapi import status
+from fastapi.responses import JSONResponse
 from fastapi.routing import APIRouter
+from pydantic_mongo import PydanticObjectId
 
 from ..database.products import product_collection
 from ..models import Product
 
-products = []
-iid = 0
 
-__all__ = ["product_router"]
+__all__ = ["products_router"]
 
 
-product_router = APIRouter(prefix="/products", tags=["Products"])
+products_router = APIRouter(prefix="/products", tags=["Products"])
 
 
-@product_router.get("/products")
-def list_products(products: product_collection):
-    return products.find()
+@products_router.get("/")
+async def list_products(products: product_collection):
+    return [Product.model_validate(product) for product in products.find()]
 
 
-@product_router.get("/products/{id}")
-def get_product(id: int):
-    for product in products:
-        if product.get("id") == id:
-            return product
-    return {"Error": "Product not found"}
+@products_router.get("/{id}")
+async def get_product(id: PydanticObjectId, products: product_collection):
+    if db_product := products.find_one({"_id": id}):
+        return Product.model_validate(db_product)
+    else:
+        return JSONResponse(
+            status_code=status.HTTP_404_NOT_FOUND,
+            content={"error": f"Product with id: {id}, was not found."},
+        )
 
 
-@product_router.post("/products")
-def create_product(product: Product):
-    """
-    Con simplemente declarar el tipo de nuestro parametro (`product: Product`)
-    fastapi se va aencargar de validar nuestra data!
-
-    Además también vamos a obtener la documentación necesaria en Swagger.
-
-    """
-    try:
-        global iid
-        iid += 1
-        # De esta manera le decimos a python que estamos usando una variable
-        # global iid
-
-        product_dict = product.model_dump()  # en la docu: .dict()
-        product_dict.update({"id": iid})
-        products.append(product_dict)
-
-    except Exception as e:
-        return {"Error": str(e)}
-
-    return {"Success": f"Product created with id {product_dict.get('id')}"}
-
-
-@roles_router.get("/")
-def get_roles():
-    roles = [Role.model_validate(r) for r in db.roles.find()]
-    return {"roles": roles}
-
-
-@roles_router.get("/{role_id}")
-def get_role(role_id: int):
-    role = Role.model_validate(db.roles.find_one({"role_id": role_id}))
-    return {"role": role}
-
-
-@roles_router.post("/")
-def create_role(role: Role):
-    result = db.roles.insert_one(role.model_dump(exclude={"id"}))
-    return {"result": str(result.inserted_id)}
+@products_router.post("/", status_code=status.HTTP_201_CREATED)
+async def create_product(product: Product, products: product_collection):
+    result = products.insert_one(product.model_dump())
+    return {"result message": f"Product created with id: {result.inserted_id}"}

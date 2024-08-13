@@ -48,7 +48,11 @@ administrar las dependencias de nuestro proyecto el no puede ser una de ellas.
 
   - Segundo debemos instalar `pipx`
     ([fuente](https://github.com/pypa/pipx?tab=readme-ov-file#install-pipx))
-  - Finalmente podemos instalar Poetry con: `pipx install poetry`
+  - Finalmente podemos instalar Poetry con:
+
+```shell
+pipx install poetry
+```
 
 ### [Configuración de Poetry](.)
 
@@ -176,10 +180,20 @@ manualmente todos nuestros recursos.
 Por lo cual mejor vamos a agregar un paquete que va a extender la funcionalidad de
 pydantic para tratar estos objetos:
 
-- `poetry add pydantic-mongo`
+```shell
+poetry add pydantic-mongo
+```
 
 y vamos a modificar nuestros modelos como en el módulo
 [`models/products.py`](../api/models/products.py).
 
 Finalmente, vamos a conectar nuestros endpoints de
 [`routes/products.py`](../api/routes/products.py) con la base de datos.
+
+---
+
+> Pendiente:
+>
+> - Mover la configuración base de la base de datos en `config`.
+> - Renombrar `database` -> `services`.
+> - Por último, mover la lógica de CRUD de `routes` -> `services`.
