@@ -101,7 +101,7 @@ y se nos va a abrir un modal en el que vamos a presionar en la opción
 
 ### [Configuración de la base de datos](.)
 
-En nuestro proyecto vamos a crear uns archivo: [`.env`](../.env)
+En nuestro proyecto vamos a crear un archivo: [`.env`](../.env.example)
 y vamos a crear esta variable de entorno:
 
 ```shell
