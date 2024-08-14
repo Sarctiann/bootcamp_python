@@ -1,7 +1,7 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-from ..config import COLLECTIONS, MONGODB_URI, logger
+from .__base_config import COLLECTIONS, MONGODB_URI, logger
 
 __all__ = ["db"]
 

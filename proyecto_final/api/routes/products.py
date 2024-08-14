@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from fastapi.routing import APIRouter
 from pydantic_mongo import PydanticObjectId
 
-from ..database.products import product_collection
+from ..services import ProductsServiceDependency
 from ..models import Product
 
 
@@ -14,22 +14,19 @@ products_router = APIRouter(prefix="/products", tags=["Products"])
 
 
 @products_router.get("/")
-async def list_products(products: product_collection):
-    return [Product.model_validate(product) for product in products.find()]
+async def list_products(products: ProductsServiceDependency):
+    return products.get_all()
 
 
 @products_router.get("/{id}")
-async def get_product(id: PydanticObjectId, products: product_collection):
-    if db_product := products.find_one({"_id": id}):
-        return Product.model_validate(db_product)
-    else:
-        return JSONResponse(
-            status_code=status.HTTP_404_NOT_FOUND,
-            content={"error": f"Product with id: {id}, was not found."},
-        )
+async def get_product(id: PydanticObjectId, products: ProductsServiceDependency):
+    return products.get_one(id) or JSONResponse(
+        status_code=status.HTTP_404_NOT_FOUND,
+        content={"error": f"Product with id: {id}, was not found."},
+    )
 
 
 @products_router.post("/", status_code=status.HTTP_201_CREATED)
-async def create_product(product: Product, products: product_collection):
-    result = products.insert_one(product.model_dump(exclude={"id"}))
-    return {"result message": f"Product created with id: {result.inserted_id}"}
+async def create_product(product: Product, products: ProductsServiceDependency):
+    inserted_id = products.create_one(product)
+    return {"result message": f"Product created with id: {inserted_id}"}
