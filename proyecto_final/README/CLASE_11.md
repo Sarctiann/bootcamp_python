@@ -32,8 +32,8 @@
 
 ## [Autenticación y Autorización](.)
 
-> ([manual implementation](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/#hash-and-verify-the-passwords),
-> [fastapi-jwt](https://pypi.org/project/fastapi-jwt/))
+> [manual implementation](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/#hash-and-verify-the-passwords)
+> [`fastapi-jwt`](https://pypi.org/project/fastapi-jwt/)
 
 ---
 
