@@ -11,6 +11,7 @@ fastapi = {extras = ["standard"], version = "^0.112.0"}
 pymongo = {extras = ["srv"], version = "^4.8.0"}
 pydantic-mongo = "^2.3.0"
 fastapi-jwt = {extras = ["authlib"], version = "^0.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 
 
 [build-system]

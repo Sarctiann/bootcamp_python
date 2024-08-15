@@ -1,16 +1,32 @@
-__all__ = ["User", "LoginUser", "StoredUser", "CreationUser"]
+__all__ = [
+    "BaseUser",
+    "LoginUser",
+    "PublicStoredUser",
+    "PrivateStoredUser",
+    "CreationUser",
+]
 
-from typing import Literal
+from enum import Enum
 
 from pydantic import BaseModel, Field
 from pydantic_mongo import PydanticObjectId
 
 
-class User(BaseModel):
+class Role(str, Enum):
+    admin = "admin"
+    customer = "customer"
+    seller = "seller"
+
+
+class BaseUser(BaseModel):
     username: str
-    role: Literal["admin", "customer", "seller"]
+    role: Role = Role.admin
     email: str = Field(default=None)
     image: str = Field(default=None)
+
+
+class CreationUser(BaseUser):
+    password: str
 
 
 class LoginUser(BaseModel):
@@ -18,10 +34,10 @@ class LoginUser(BaseModel):
     password: str
 
 
-class CreationUser(User):
-    password: str
+class PublicStoredUser(BaseUser):
+    id: PydanticObjectId
 
 
-class StoredUser(User):
+class PrivateStoredUser(BaseUser):
     id: PydanticObjectId = Field(alias="_id")
     hash_password: str

@@ -15,3 +15,6 @@ if not MONGODB_URI:
 
 logger = logging.getLogger("uvicorn")
 # logger.setLevel(logging.DEBUG)
+
+# Fixing a "bycript issue"
+logging.getLogger("passlib").setLevel(logging.ERROR)
