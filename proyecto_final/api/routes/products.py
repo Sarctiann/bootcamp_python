@@ -1,14 +1,12 @@
+__all__ = ["products_router"]
+
 from fastapi import status
 from fastapi.responses import JSONResponse
 from fastapi.routing import APIRouter
 from pydantic_mongo import PydanticObjectId
 
-from ..services import ProductsServiceDependency
 from ..models import Product
-
-
-__all__ = ["products_router"]
-
+from ..services import ProductsServiceDependency
 
 products_router = APIRouter(prefix="/products", tags=["Products"])
 

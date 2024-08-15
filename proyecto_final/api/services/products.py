@@ -1,3 +1,5 @@
+__all__ = ["ProductsServiceDependency"]
+
 from typing import Annotated
 
 from fastapi import Depends
@@ -6,12 +8,10 @@ from pydantic_mongo import PydanticObjectId
 from ..config import COLLECTIONS, db
 from ..models import Product, StoredProduct
 
-__all__ = ["ProductsServiceDependency"]
-
 
 class ProductsService:
     assert (collection_name := "products") in COLLECTIONS
-    collection = db.products
+    collection = db[collection_name]
 
     @classmethod
     def create_one(cls, product: Product):

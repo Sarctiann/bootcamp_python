@@ -1,9 +1,11 @@
+__all__ = ["db", "COLLECTIONS"]
+
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-from .__base_config import COLLECTIONS, MONGODB_URI, logger
+from .__base_config import MONGODB_URI, logger
 
-__all__ = ["db"]
+COLLECTIONS = ["products", "users"]
 
 # Create a new client and connect to the server
 client = MongoClient(MONGODB_URI, server_api=ServerApi("1"))

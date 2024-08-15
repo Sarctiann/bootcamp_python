@@ -1,7 +1,7 @@
+__all__ = ["Product", "StoredProduct"]
+
 from pydantic import BaseModel, Field
 from pydantic_mongo import PydanticObjectId
-
-__all__ = ["Product", "StoredProduct"]
 
 
 class Product(BaseModel):
