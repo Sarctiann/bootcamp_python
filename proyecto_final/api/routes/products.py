@@ -29,7 +29,7 @@ async def create_product(
     product: Product, products: ProductsServiceDependency, auth: AuthServiceDependency
 ):
     assert (
-        auth.is_admin() or auth.is_seller()
+        auth.is_admin or auth.is_seller
     ), "Only admins and sellers can create products"
     inserted_id = products.create_one(product)
     return {"result message": f"Product created with id: {inserted_id}"}

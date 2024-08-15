@@ -106,12 +106,15 @@ class AuthService:
     def __init__(self, credentials: AuthCredentials):
         self.credentials = credentials
 
+    @property
     def is_admin(self):
         return self.credentials.subject.get("role") == "admin"
 
+    @property
     def is_customer(self):
         return self.credentials.subject.get("role") == "customer"
 
+    @property
     def is_seller(self):
         return self.credentials.subject.get("role") == "seller"
 
