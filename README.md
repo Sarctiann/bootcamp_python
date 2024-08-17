@@ -78,8 +78,8 @@ Resumen
 
 ### Modulo 5 ( Creación de una pequeña app )
 
-- Clase 10. Creación de una REST API - Parte 1
-- Clase 11. Creación de una REST API - Parte 2
-- Clase 12. Autenticación, autorización y servicios en REST APIs
+- Clase 10. Creación de una REST API
+- Clase 11. Continuemos con REST API
+- Clase 12. Finalizamos con REST API
 
 > Sebastián Atlántico Rodríguez Capurro.
