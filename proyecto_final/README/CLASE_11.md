@@ -74,7 +74,7 @@ cliente.
 
 Luego debemos implementar la autorización dependiendo del caso. Por ejemplo
 "Si el usuario autenticado es "admin", puede crear un nuevo usuario con el rol
-"seller" o "Si el usuario autenticado "seller", puede crear un producto".
+"seller" o "Si el usuario autenticado es "seller", puede crear un producto".
 
 ---
 

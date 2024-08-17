@@ -8,10 +8,10 @@ from fastapi_jwt import JwtAccessBearer, JwtAuthorizationCredentials
 from passlib.context import CryptContext
 from pydantic_mongo import PydanticObjectId
 
-from ..config import COLLECTIONS, db, token_expiration_time
+from ..config import COLLECTIONS, db, token_expiration_time, SECRET_KEY
 from ..models import CreationUser, LoginUser, PrivateStoredUser, PublicStoredUser
 
-access_security = JwtAccessBearer(secret_key="secret_key", auto_error=True)
+access_security = JwtAccessBearer(secret_key=SECRET_KEY or "", auto_error=True)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
@@ -104,19 +104,21 @@ AuthCredentials = Annotated[JwtAuthorizationCredentials, Security(access_securit
 
 class AuthService:
     def __init__(self, credentials: AuthCredentials):
-        self.credentials = credentials
+        self.auth_user = credentials.subject
 
     @property
     def is_admin(self):
-        return self.credentials.subject.get("role") == "admin"
-
-    @property
-    def is_customer(self):
-        return self.credentials.subject.get("role") == "customer"
+        assert self.auth_user.get("role") == "admin", "User does not have admin role"
 
     @property
     def is_seller(self):
-        return self.credentials.subject.get("role") == "seller"
+        role = self.auth_user.get("role")
+        assert role == "admin" or role == "seller", "User does not have seller role"
+
+    @property
+    def is_customer(self):
+        role = self.auth_user.get("role")
+        assert role == "admin" or role == "customer", "User does not have customer role"
 
 
 AuthServiceDependency = Annotated[AuthService, Depends()]

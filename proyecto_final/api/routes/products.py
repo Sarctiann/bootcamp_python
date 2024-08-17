@@ -26,10 +26,10 @@ async def get_product(id: PydanticObjectId, products: ProductsServiceDependency)
 
 @products_router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_product(
-    product: Product, products: ProductsServiceDependency, auth: AuthServiceDependency
+    product: Product,
+    products: ProductsServiceDependency,
+    auth: AuthServiceDependency,
 ):
-    assert (
-        auth.is_admin or auth.is_seller
-    ), "Only admins and sellers can create products"
+    auth.is_seller
     inserted_id = products.create_one(product)
     return {"result message": f"Product created with id: {inserted_id}"}
