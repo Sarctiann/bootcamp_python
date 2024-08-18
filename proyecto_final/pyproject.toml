@@ -4,14 +4,15 @@ version = "0.1.0"
 description = "Las bases para la creación de una API de un \"eCommerce\" de ejemplo"
 authors = ["Sarctiann <sebas.sarc@gmail.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = {extras = ["standard"], version = "^0.112.0"}
-pymongo = {extras = ["srv"], version = "^4.8.0"}
+fastapi = { extras = ["standard"], version = "^0.112.0" }
+pymongo = { extras = ["srv"], version = "^4.8.0" }
 pydantic-mongo = "^2.3.0"
-fastapi-jwt = {extras = ["authlib"], version = "^0.3.0"}
-passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+fastapi-jwt = { extras = ["authlib"], version = "^0.3.0" }
+passlib = { extras = ["bcrypt"], version = "^1.7.4" }
 
 
 [build-system]
