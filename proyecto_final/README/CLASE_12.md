@@ -138,12 +138,13 @@ relativas.
 
 Para desplegar nuestra app en Coyeb:
 
-1. Creamos una cuenta en [Coyeb](https://koyeb.com)
-1. Conectamos nuestra cuenta de Github
-1. seguimos los pasos, y ya teniendo los archivos de configuración, todo debería
-   estar listo para levantar nuestra app.
-
-> Mas detalles en el [repo de despliegue](https://github.com/Sarctiann/python_api/blob/main/README/CLASE_12.md#despliegue)
+1. Nos registramos en [Koyeb](https://koyeb.com) con nuestra cuenta de GitHub
+1. Para crear un nuevo servicio, vinculamos nuestro Github
+1. Elegimos el repositorio de nuestra app.
+1. Luego de elegir la "región". vamos a ver un Menu con varias opciones desplegables.
+1. Buscamos "Environment variables" y seteamos las variables como las tenemos en
+   nuestro `.env`
+1. Le damos al botón "Deploy" y debería ocurrir la magia.
 
 ---
 
