@@ -4,11 +4,12 @@ __all__ = [
     "PublicStoredUser",
     "PrivateStoredUser",
     "CreationUser",
+    "UpdationUser",
 ]
 
 from enum import Enum
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, AliasChoices
 from pydantic_mongo import PydanticObjectId
 
 
@@ -20,7 +21,14 @@ class Role(str, Enum):
 
 class BaseUser(BaseModel):
     username: str
-    role: Role = Role.admin
+    role: Role = Role.customer
+    email: str = Field(default=None)
+    image: str = Field(default=None)
+
+
+class UpdationUser(BaseUser):
+    username: str = Field(default=None)
+    role: Role = Field(default=None)
     email: str = Field(default=None)
     image: str = Field(default=None)
 
@@ -35,7 +43,7 @@ class LoginUser(BaseModel):
 
 
 class PublicStoredUser(BaseUser):
-    id: PydanticObjectId
+    id: PydanticObjectId = Field(validation_alias=AliasChoices("_id", "id"))
 
 
 class PrivateStoredUser(BaseUser):

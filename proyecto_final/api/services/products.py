@@ -2,11 +2,11 @@ __all__ = ["ProductsServiceDependency"]
 
 from typing import Annotated
 
-from fastapi import Depends
+from fastapi import Depends, HTTPException, status
 from pydantic_mongo import PydanticObjectId
 
 from ..config import COLLECTIONS, db
-from ..models import Product, StoredProduct
+from ..models import Product, StoredProduct, UpdationProduct
 
 
 class ProductsService:
@@ -35,16 +35,29 @@ class ProductsService:
             return None
 
     @classmethod
-    def update_one(cls, id: PydanticObjectId, product: Product):
-        return cls.collection.find_one_and_update(
+    def update_one(cls, id: PydanticObjectId, product: UpdationProduct):
+        document = cls.collection.find_one_and_update(
             {"_id": id},
             {"$set": product.model_dump()},
             return_document=True,
         )
 
+        if document:
+            return StoredProduct.model_validate(document).model_dump()
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Product not found"
+            )
+
     @classmethod
     def delete_one(cls, id: PydanticObjectId):
-        return cls.collection.find_one_and_delete({"_id": id})
+        document = cls.collection.find_one_and_delete({"_id": id})
+        if document:
+            return StoredProduct.model_validate(document).model_dump()
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Product not found"
+            )
 
 
 ProductsServiceDependency = Annotated[ProductsService, Depends()]

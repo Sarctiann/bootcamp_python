@@ -5,8 +5,8 @@ from fastapi.responses import JSONResponse
 from fastapi.routing import APIRouter
 from pydantic_mongo import PydanticObjectId
 
-from ..models import Product
-from ..services import ProductsServiceDependency, AuthServiceDependency
+from ..models import Product, UpdationProduct
+from ..services import ProductsServiceDependency, SecurityDependency
 
 products_router = APIRouter(prefix="/products", tags=["Products"])
 
@@ -28,8 +28,20 @@ async def get_product(id: PydanticObjectId, products: ProductsServiceDependency)
 async def create_product(
     product: Product,
     products: ProductsServiceDependency,
-    auth: AuthServiceDependency,
+    auth: SecurityDependency,
 ):
     auth.is_seller
     inserted_id = products.create_one(product)
     return {"result message": f"Product created with id: {inserted_id}"}
+
+
+@products_router.put("/{id}")
+async def update_product(
+    id: PydanticObjectId, product: UpdationProduct, products: ProductsServiceDependency
+):
+    return products.update_one(id, product)
+
+
+@products_router.delete("/{id}")
+async def delete_product(id: PydanticObjectId, products: ProductsServiceDependency):
+    return products.delete_one(id)
