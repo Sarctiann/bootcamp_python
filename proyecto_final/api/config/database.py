@@ -1,4 +1,4 @@
-__all__ = ["db", "COLLECTIONS"]
+__all__ = ["db", "COLLECTIONS", "create_collections"]
 
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
@@ -23,16 +23,11 @@ db = client.bootcamp_eCommerce_app
 
 
 def create_collections():
-    logger.warn("")
-    logger.info("Initializing collections...")
+    print("Initializing collections...")
     for collection in COLLECTIONS:
         if collection not in db.list_collection_names():
             db.create_collection(collection)
-            logger.warn(f"\tCollection '{collection}' created.")
+            print(f"\tCollection '{collection}' created.")
         else:
-            logger.info(f"\tCollection '{collection}' already exists.")
-    logger.warn("")
-
-
-# Create Collections (optional)
-create_collections()
+            print(f"\tCollection '{collection}' already exists.")
+    print()
