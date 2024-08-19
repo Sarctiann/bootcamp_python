@@ -5,7 +5,7 @@ from pydantic_mongo import PydanticObjectId
 
 
 class Order(BaseModel):
-    custommer_id: PydanticObjectId
+    customer_id: PydanticObjectId
     product_id: PydanticObjectId
     price: float
     quantity: int

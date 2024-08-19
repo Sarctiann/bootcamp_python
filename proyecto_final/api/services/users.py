@@ -1,4 +1,4 @@
-__all__ = ["UsersServiceDependency"]
+__all__ = ["UsersServiceDependency", "UsersService"]
 
 
 from typing import Annotated
@@ -16,18 +16,26 @@ class UsersService:
     collection = db[collection_name]
 
     @classmethod
-    def create_one(cls, user: CreationUser, hash_password: str):
-        existing_user = cls.get_one(
-            username=user.username,
-            email=user.email,
-        )
-        if existing_user:
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT, detail="User already exists"
+    def create_one(
+        cls, user: CreationUser, hash_password: str, make_it_admin: bool = False
+    ):
+        try:
+            existing_user = cls.get_one(
+                username=user.username,
+                email=user.email,
             )
+            if existing_user:
+                raise HTTPException(
+                    status_code=status.HTTP_409_CONFLICT, detail="User already exists"
+                )
+        except HTTPException:
+            pass
 
-        insert_user = user.model_dump(exclude={"password"})
+        insert_user = user.model_dump(exclude={"password"}, exclude_unset=True)
         insert_user.update(hash_password=hash_password)
+
+        if make_it_admin:
+            insert_user.update(role="admin")
 
         result = cls.collection.insert_one(insert_user)
         if result:

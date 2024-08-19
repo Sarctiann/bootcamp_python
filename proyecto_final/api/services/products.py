@@ -1,4 +1,4 @@
-__all__ = ["ProductsServiceDependency"]
+__all__ = ["ProductsServiceDependency", "ProductsService"]
 
 from typing import Annotated
 
@@ -16,7 +16,8 @@ class ProductsService:
 
     @classmethod
     def create_one(cls, product: Product):
-        result = cls.collection.insert_one(product.model_dump())
+        insertion_product = product.model_dump(exclude_unset=True)
+        result = cls.collection.insert_one(insertion_product)
         if result:
             return str(result.inserted_id)
         return None

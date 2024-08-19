@@ -101,7 +101,8 @@ poetry export --without-hashes -o requirements.txt
 ```
 
 Además vamos a necesitar configurar algunas variables de entorno más en
-[.env](../.env.example).
+[.env](../.env.example). Para luego poder extender nuestros
+["origenes admitidos"](../api/config/security.py#L9)
 
 ---
 
@@ -112,16 +113,20 @@ teniamos definida una función que se ejecutaba siempre que nuestro servidor se
 inicializaba. El problema con esto es que deberíamos modificar el archivo si quisieramos
 que esta función se ejecute o se deje de ejecutar.
 
-La solución a este problema es definir un [script](../scripts/init_db_collections.py)
-de inicialización que vamos a ejecutar nosotros una única vez, o las veces que lo
-queramos hacer, independientemente de la inicialización de nuestro servidor.
+La solución a este problema es definir scripts como
+[create_super_user](../scripts/create_super_user.py) o
+[seed_database](../scripts/seed_database.py) de inicialización que vamos a ejecutar
+nosotros una única vez, o las veces que lo queramos hacer, independientemente de
+la inicialización de nuestro servidor.
 
 Ahora bien, este script se encuenta en un directorio de scripts. Por lo que para
 importar módulos de nuestra app. tendríamos problemas ya que necesitamos referirnos
 a paquetes que están fuera del paquete scripts. Por lo que lo vamos a ejecutar con
 
 ```shell
-python -m scripts.init_db_collections
+python -m scripts.create_super_user
+# y
+python -m scripts.seed_database
 ```
 
 de esta forma nuestro script se ejecutará como un módulo y podrá realizar importaciones

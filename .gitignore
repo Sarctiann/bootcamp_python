@@ -1,7 +1,7 @@
 **/*resolved.py
 *resolved.py
 .env
-.secret
+ADMIN_USER_CONF
 
 .venv
 .ejercicios_venv

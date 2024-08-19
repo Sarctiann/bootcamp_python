@@ -1,4 +1,4 @@
-__all__ = ["OrdersServiceDependency"]
+__all__ = ["OrdersServiceDependency", "OrdersService"]
 
 
 from typing import Annotated
@@ -17,13 +17,7 @@ class OrdersService:
 
     @classmethod
     def create_one(cls, order: Order):
-        insertion_document = {
-            "custommer_id": {"$oid": order.custommer_id},
-            "product_id": {"$oid": order.product_id},
-            "price": order.price,
-            "quantity": order.quantity,
-        }
-        document = cls.collection.insert_one(insertion_document)
+        document = cls.collection.insert_one(order.model_dump())
         if document:
             return str(document.inserted_id)
         return None
@@ -42,7 +36,7 @@ class OrdersService:
             filter_criteria.update(
                 {
                     "$or": [
-                        {"custommer_id": authorized_user_id},
+                        {"customer_id": authorized_user_id},
                         {"seller_id": authorized_user_id},
                     ]
                 }

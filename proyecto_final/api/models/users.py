@@ -13,6 +13,11 @@ from pydantic import BaseModel, Field, AliasChoices
 from pydantic_mongo import PydanticObjectId
 
 
+class CreationRole(str, Enum):
+    customer = "customer"
+    seller = "seller"
+
+
 class Role(str, Enum):
     admin = "admin"
     customer = "customer"
@@ -23,17 +28,18 @@ class BaseUser(BaseModel):
     username: str
     role: Role = Role.customer
     email: str = Field(default=None)
-    image: str = Field(default=None)
+    image: str | None = Field(default=None)
 
 
 class UpdationUser(BaseUser):
     username: str = Field(default=None)
     role: Role = Field(default=None)
     email: str = Field(default=None)
-    image: str = Field(default=None)
+    image: str | None = Field(default=None)
 
 
 class CreationUser(BaseUser):
+    role: CreationRole = CreationRole.customer
     password: str
 
 
