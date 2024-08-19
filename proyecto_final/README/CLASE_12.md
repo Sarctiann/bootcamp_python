@@ -136,6 +136,13 @@ relativas.
 
 ## [Despliegue](.)
 
+Para desplegar nuestra app en Coyeb:
+
+1. Creamos una cuenta en [Coyeb](https://koyeb.com)
+1. Conectamos nuestra cuenta de Github
+1. seguimos los pasos, y ya teniendo los archivos de configuración, todo debería
+   estar listo para levantar nuestra app.
+
 ---
 
 ---
