@@ -6,7 +6,7 @@ from pymongo.server_api import ServerApi
 from .__base_config import MONGODB_URI, logger
 
 DB_NAME = "bootcamp_eCommerce_app"
-COLLECTIONS = ["products", "users"]
+COLLECTIONS = ["products", "users", "orders"]
 
 # Create a new client and connect to the server
 client = MongoClient(MONGODB_URI, server_api=ServerApi("1"))

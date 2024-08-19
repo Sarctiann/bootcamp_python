@@ -7,6 +7,7 @@ from pydantic_mongo import PydanticObjectId
 
 from ..config import COLLECTIONS, db
 from ..models import Product, StoredProduct, UpdationProduct
+from ..__common_deps import QueryParamsDependency
 
 
 class ProductsService:
@@ -17,14 +18,14 @@ class ProductsService:
     def create_one(cls, product: Product):
         result = cls.collection.insert_one(product.model_dump())
         if result:
-            return result.inserted_id
+            return str(result.inserted_id)
         return None
 
     @classmethod
-    def get_all(cls):
+    def get_all(cls, params: QueryParamsDependency):
         return [
             StoredProduct.model_validate(product).model_dump()
-            for product in cls.collection.find()
+            for product in params.query_collection(cls.collection)
         ]
 
     @classmethod
@@ -32,7 +33,9 @@ class ProductsService:
         if db_product := cls.collection.find_one({"_id": id}):
             return StoredProduct.model_validate(db_product).model_dump()
         else:
-            return None
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Product not found"
+            )
 
     @classmethod
     def update_one(cls, id: PydanticObjectId, product: UpdationProduct):

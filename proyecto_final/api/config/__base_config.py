@@ -1,4 +1,4 @@
-__all__ = ["MONGODB_URI", "logger", "SECRET_KEY"]
+__all__ = ["MONGODB_URI", "logger", "SECRET_KEY", "HOST_URL"]
 
 import logging
 import os
@@ -15,6 +15,16 @@ if not MONGODB_URI:
 SECRET_KEY = os.getenv("SECRET_KEY")
 if not SECRET_KEY:
     raise Exception("Secret key not found")
+
+HOST_URL = os.getenv("HOST_URL")
+if not HOST_URL:
+    raise Exception("Host url not found")
+
+FRONTEND_HOST = os.getenv("FRONTEND_HOST")
+if not FRONTEND_HOST:
+    raise Exception("Frontend host not found")
+
+HOST_PORT = os.getenv("HOST_PORT") or 8000
 
 logger = logging.getLogger("uvicorn")
 # logger.setLevel(logging.DEBUG)

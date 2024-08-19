@@ -3,6 +3,7 @@ from pydantic_mongo import PydanticObjectId
 
 from ..models import BaseUser, CreationUser, UpdationUser
 from ..services import UsersServiceDependency, AuthServiceDependency
+from ..__common_deps import QueryParamsDependency
 
 users_router = APIRouter(prefix="/Users", tags=["Users"])
 
@@ -17,8 +18,8 @@ def create_user(
 
 
 @users_router.get("/")
-def get_all_users(users: UsersServiceDependency):
-    return users.get_all()
+def get_all_users(users: UsersServiceDependency, params: QueryParamsDependency):
+    return users.get_all(params)
 
 
 @users_router.get("/{id}")

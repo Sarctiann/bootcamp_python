@@ -43,11 +43,65 @@ o logearnos.
 ### Completamos nuestras operaciones CRUD
 
 Ahora completamos nuestras rutas de [productos](../api/routes/products.py) y
-[usuarios](../api/routes/users.py)
+[usuarios](../api/routes/users.py).
 
----
+Esto también requiere que mejoremos nuestra capa de servicio, ya que teníamos
+servicios que no estaban retornando, data serializable.
+([products.update_one](../api/services/products.py#L38), o
+[products.delete_one](../api/services/products.py#L53))
+
+### Agregamos parametros de consulta
+
+Cualquier endpoint puede tomar query-params, pero es prácticamente oblicatorio
+proveer básicamente los parametros de paginado (limit y offset), otros parámetros
+muy comunes (y dependiendo del caso, igualmente importantes) son filter y sort.
+
+| Query-Param        | Description                                             |
+| ------------------ | ------------------------------------------------------- |
+| limit              | Cantidad de elementos a retornar.                       |
+| offset             | Cantidad de elementos a saltar. `(limit * page_number)` |
+| sort (`sort_by`)   | Criterio de ordenamiento. (ordenar por un campo)        |
+| order (`sort_dir`) | Ordenamiento. (ascendente o descendente)                |
+| filter (`q`)       | Criterio de filtrado. (coincidencia de algún tipo)      |
+
+Para esto creemos una nueva dependencia [QueryParamsDependency](../api/__common_deps.py#L11)
+que vamos a usar en nuestros endpoints que retornen "una lista" de elementos.
+
+### Creamos la Entidad "Orders"
+
+- [model](../api/models/orders.py)
+- [service](../api/services/orders.py)
+- [route](../api/routes/orders.py)
 
 ## [Archivos de Configuración](.)
+
+Ahora que tenemos todas las funcionalidades básicas de nuestra app implementadas,
+es momento de moverla a su propio repositorio. (Ustedes probablemente ya tengan sus
+applicaciones en otro repositorio).
+
+Tenemos muchisimas formas diferentes de desplegar nuestra aplicación. Pero para
+propósitos demostrativos esta vez lo vamos a hacer en un servicio que nos ofrece
+una capa gratuita
+
+### [Koyeb](https://koyeb.com)
+
+Koyeb es una plataforma que como muchas otras, están preparados para desplegar
+aplicaciones en varios lenguajes con una configuración mínima. Para desplegar
+nuestra app necesitamos tener dos archivos:
+
+- [`Procfile`](../Procfile) el Procfile (archivo de proceso) es un archivo donde
+  definimos una lista de procesos que la plataforma necesita ejecutar para levantar
+  nuestra app.
+
+- [`requirements.txt`](../requirements.txt) nuestro viejo amigo... para generar
+  este archivo solo tendremos que correr:
+
+```shell
+poetry export --without-hashes -o requirements.txt
+```
+
+Además vamos a necesitar configurar algunas variables de entorno más en
+[.env](../.env.example).
 
 ---
 
@@ -80,9 +134,3 @@ relativas.
 ---
 
 ---
-
-# TODO:
-
-- queryParams (para paginado y filtro)
-- compras (models, services, routes)
-- koyeb

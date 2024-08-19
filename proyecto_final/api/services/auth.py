@@ -10,7 +10,10 @@ from passlib.context import CryptContext
 from ..config import SECRET_KEY, token_expiration_time
 from ..models import LoginUser, PublicStoredUser
 
-access_security = JwtAccessBearer(secret_key=SECRET_KEY or "", auto_error=True)
+access_security = JwtAccessBearer(
+    secret_key=SECRET_KEY or "",
+    auto_error=True,
+)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
@@ -49,20 +52,37 @@ class AuthService:
 
 class SecurityService:
     def __init__(self, credentials: AuthCredentials):
-        self.auth_user = credentials.subject
+        self.auth_user_id = credentials.subject.get("id")
+        self.auth_user_name = credentials.subject.get("name")
+        self.auth_user_email = credentials.subject.get("email")
+        self.auth_user_role = credentials.subject.get("role")
 
     @property
     def is_admin(self):
-        assert self.auth_user.get("role") == "admin", "User does not have admin role"
+        return self.auth_user_role == "admin"
 
     @property
     def is_seller(self):
-        role = self.auth_user.get("role")
-        assert role == "admin" or role == "seller", "User does not have seller role"
+        role = self.auth_user_role
+        return role == "admin" or role == "seller"
 
     @property
     def is_customer(self):
-        role = self.auth_user.get("role")
+        role = self.auth_user_role
+        return role == "admin" or role == "customer"
+
+    @property
+    def is_admin_or_raise(self):
+        assert self.auth_user_role == "admin", "User does not have admin role"
+
+    @property
+    def is_seller_or_raise(self):
+        role = self.auth_user_role
+        assert role == "admin" or role == "seller", "User does not have seller role"
+
+    @property
+    def is_customer_or_raise(self):
+        role = self.auth_user_role
         assert role == "admin" or role == "customer", "User does not have customer role"
 
 

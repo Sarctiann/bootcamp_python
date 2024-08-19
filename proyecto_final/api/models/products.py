@@ -5,18 +5,20 @@ from pydantic_mongo import PydanticObjectId
 
 
 class Product(BaseModel):
+    seller_id: PydanticObjectId
     name: str
-    description: str = Field(default=None)
     price: float
     quantity: int
+    description: str = Field(default=None)
     image: str = Field(default=None)
 
 
 class UpdationProduct(BaseModel):
+    seller_id: PydanticObjectId = Field(default=None)
     name: str = Field(default=None)
-    description: str = Field(default=None)
     price: float = Field(default=None)
     quantity: int = Field(default=None)
+    description: str = Field(default=None)
     image: str = Field(default=None)
 
 

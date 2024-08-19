@@ -8,6 +8,7 @@ from pydantic_mongo import PydanticObjectId
 
 from ..config import COLLECTIONS, db
 from ..models import CreationUser, PrivateStoredUser, PublicStoredUser, UpdationUser
+from ..__common_deps import QueryParamsDependency
 
 
 class UsersService:
@@ -30,15 +31,15 @@ class UsersService:
 
         result = cls.collection.insert_one(insert_user)
         if result:
-            return result.inserted_id
+            return str(result.inserted_id)
         return None
 
     @classmethod
-    def get_all(cls, role=None):
-        filter = {"role": role} if role else {}
-        cursor = cls.collection.find(filter)
-
-        return [PublicStoredUser.model_validate(user).model_dump() for user in cursor]
+    def get_all(cls, params: QueryParamsDependency):
+        return [
+            PublicStoredUser.model_validate(user).model_dump()
+            for user in params.query_collection(cls.collection)
+        ]
 
     @classmethod
     def get_one(
@@ -69,7 +70,9 @@ class UsersService:
                 else PublicStoredUser.model_validate(db_user).model_dump()
             )
         else:
-            return None
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
+            )
 
     @classmethod
     def update_one(cls, id: PydanticObjectId, user: UpdationUser):
