@@ -143,6 +143,8 @@ Para desplegar nuestra app en Coyeb:
 1. seguimos los pasos, y ya teniendo los archivos de configuración, todo debería
    estar listo para levantar nuestra app.
 
+> Mas detalles en el [repo de despliegue](https://github.com/Sarctiann/python_api/blob/main/README/CLASE_12.md#despliegue)
+
 ---
 
 ---
