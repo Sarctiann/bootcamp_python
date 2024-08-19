@@ -13,6 +13,7 @@
 1. Creación de modelos o entidades a utilizar:
    - Producto
    - Usuario
+   - Compra
 1. Armado de arquitectura básica:
    - config
    - routes
