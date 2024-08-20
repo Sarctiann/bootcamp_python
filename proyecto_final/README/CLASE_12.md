@@ -91,7 +91,8 @@ nuestra app necesitamos tener dos archivos:
 
 - [`Procfile`](../Procfile) el Procfile (archivo de proceso) es un archivo donde
   definimos una lista de procesos que la plataforma necesita ejecutar para levantar
-  nuestra app.
+  nuestra app. (Koyeb parece ejecutar únicamente el proceso `web`, por lo que tendremos
+  que correr nuestras configuraciones por nuestra cuenta).
 
 - [`requirements.txt`](../requirements.txt) nuestro viejo amigo... para generar
   este archivo solo tendremos que correr:
@@ -145,6 +146,8 @@ Para desplegar nuestra app en Coyeb:
 1. Buscamos "Environment variables" y seteamos las variables como las tenemos en
    nuestro `.env`
 1. Le damos al botón "Deploy" y debería ocurrir la magia.
+1. Ahora Koyeb nos va a dar un dominio para nuestra app. Hay que copiarlo y pegarlo
+   actualizar la variable de entorno `HOST_URL` (en la configuración de nuestra app).
 
 ---
 
