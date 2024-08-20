@@ -12,6 +12,8 @@
 
 - ### [Clase 11](README/CLASE_11.md)
 
+- ### [Clase 12](README/CLASE_12.md)
+
 ---
 
 - ### [Requerimentos de aplicación](README/AppRequirements.md)
